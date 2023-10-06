@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dvf3s1lltamj6"]
+[gd_scene load_steps=18 format=3 uid="uid://dvf3s1lltamj6"]
 
 [ext_resource type="Script" path="res://globals.gd" id="1_40vn2"]
 [ext_resource type="PackedScene" uid="uid://d21l45k2wi2pj" path="res://entities/player.tscn" id="1_q1fan"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dvovcj33kym0e" path="res://assets/tilesets/forest.png" id="6_poiun"]
 [ext_resource type="Texture2D" uid="uid://bghdks3peynk3" path="res://assets/tilesets/ground_autotiles_sheet.png" id="7_mvfhv"]
 [ext_resource type="Script" path="res://FollowCamera.gd" id="8_jtj1u"]
+[ext_resource type="PackedScene" uid="uid://ckegw2ntpj2j4" path="res://entities/enemies/slime.tscn" id="10_r3y3w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xqu8t"]
 texture = ExtResource("3_k5q5k")
@@ -175,7 +176,6 @@ texture = ExtResource("3_k5q5k")
 5:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:3/0/physics_layer_0/angular_velocity = 0.0
 6:3/0 = 0
-6:3/0/terrain = 0
 6:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 6:3/0/physics_layer_0/angular_velocity = 0.0
 7:3/0 = 0
@@ -314,7 +314,6 @@ texture = ExtResource("3_k5q5k")
 3:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:6/0/physics_layer_0/angular_velocity = 0.0
 4:6/0 = 0
-4:6/0/terrain = 0
 4:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:6/0/physics_layer_0/angular_velocity = 0.0
 6:6/0 = 0
@@ -360,11 +359,9 @@ texture = ExtResource("3_k5q5k")
 3:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:7/0/physics_layer_0/angular_velocity = 0.0
 4:7/0 = 0
-4:7/0/terrain = 0
 4:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:7/0/physics_layer_0/angular_velocity = 0.0
 5:7/0 = 0
-5:7/0/terrain = 0
 5:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:7/0/physics_layer_0/angular_velocity = 0.0
 6:7/0 = 0
@@ -410,11 +407,9 @@ texture = ExtResource("3_k5q5k")
 3:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:8/0/physics_layer_0/angular_velocity = 0.0
 4:8/0 = 0
-4:8/0/terrain = 0
 4:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:8/0/physics_layer_0/angular_velocity = 0.0
 5:8/0 = 0
-5:8/0/terrain = 0
 5:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:8/0/physics_layer_0/angular_velocity = 0.0
 6:8/0 = 0
@@ -718,7 +713,6 @@ texture = ExtResource("3_k5q5k")
 13:14/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 13:14/0/physics_layer_0/angular_velocity = 0.0
 5:6/0 = 0
-5:6/0/terrain = 0
 5:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:6/0/physics_layer_0/angular_velocity = 0.0
 
@@ -9358,7 +9352,8 @@ texture = ExtResource("7_mvfhv")
 9:194/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_tafb8"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 3
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "sand"
 terrain_set_0/terrain_0/color = Color(0.188235, 0.2, 1, 1)
@@ -9420,3 +9415,11 @@ limit_left = 0
 limit_top = 0
 script = ExtResource("8_jtj1u")
 tileMap = NodePath("../..")
+
+[node name="Slime" parent="TileMap" node_paths=PackedStringArray("patrolMarker") instance=ExtResource("10_r3y3w")]
+position = Vector2(365, 184)
+speed = 10
+patrolMarker = NodePath("../Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="TileMap"]
+position = Vector2(461, 165)

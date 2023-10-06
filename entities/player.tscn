@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d21l45k2wi2pj"]
+[gd_scene load_steps=11 format=3 uid="uid://d21l45k2wi2pj"]
 
 [ext_resource type="Script" path="res://entities/player.gd" id="1_jfxu4"]
 [ext_resource type="Texture2D" uid="uid://d1d3y4du1w5mt" path="res://assets/sprites/adventurer.png" id="1_kriqx"]
@@ -102,11 +102,14 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qthrv"]
 size = Vector2(11, 3)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wnvks"]
+size = Vector2(14, 15)
+
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
 script = ExtResource("1_jfxu4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 1
 y_sort_enabled = true
 texture = ExtResource("1_kriqx")
 offset = Vector2(0, -8)
@@ -121,3 +124,12 @@ libraries = {
 [node name="WalkCollision" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -1.5)
 shape = SubResource("RectangleShape2D_qthrv")
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_wnvks")
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

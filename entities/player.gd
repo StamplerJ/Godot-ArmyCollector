@@ -7,6 +7,7 @@ extends CharacterBody2D
 func _physics_process(delta):
 	handle_input(delta)
 	move_and_slide()
+	handle_collision()
 	updateAnimation()
 	
 func handle_input(delta):
@@ -24,3 +25,14 @@ func updateAnimation():
 		if velocity.y < 0: direction = "up"
 		
 		animator.play("walk_" + direction)
+		
+func handle_collision():
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		print_debug(collider)
+
+
+func _on_hurt_box_area_entered(area):
+	if (area.name == "HitBox"):
+		print_debug(area.get_parent().name)
